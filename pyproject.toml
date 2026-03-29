@@ -1,0 +1,75 @@
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "correlation-engine-service"
+version = "0.1.0"
+description = "Astrology correlation service scaffold with typed Python architecture."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "Correlation Engine Team" }]
+dependencies = [
+  "pydantic>=2.11.0",
+  "pydantic-settings>=2.8.0",
+  "structlog>=25.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "mypy>=1.15.0",
+  "pre-commit>=4.2.0",
+  "pyright>=1.1.399",
+  "pytest>=8.3.0",
+  "pytest-cov>=6.0.0",
+  "ruff>=0.11.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/correlation_engine"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-config --strict-markers --cov=correlation_engine --cov-report=term-missing"
+minversion = "8.0"
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+  "E",
+  "F",
+  "I",
+  "N",
+  "UP",
+  "B",
+  "C4",
+  "SIM",
+  "RUF",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["correlation_engine"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_unused_configs = true
+mypy_path = ["src"]
+packages = ["correlation_engine"]
+
+[tool.pyright]
+pythonVersion = "3.12"
+typeCheckingMode = "strict"
+include = ["src", "tests"]
+venvPath = "."
+venv = ".venv"
+reportMissingTypeStubs = false
+
+[tool.coverage.run]
+branch = true
+source = ["correlation_engine"]
