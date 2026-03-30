@@ -47,3 +47,23 @@ export CORRELATION_ENGINE_LOG_LEVEL=INFO
 ## CI
 
 CI runs linting, typing, and tests on every push and pull request via GitHub Actions.
+
+## Correlating market assets (BTC, GOLD, LINK)
+
+You can use the framework-agnostic `post_correlate_assets` endpoint helper with explicit
+price series. Each asset must provide the same number of price points.
+
+```python
+from correlation_engine.api.routes import post_correlate_assets
+
+payload = {
+    "assets": [
+        {"symbol": "BTC", "prices": [100.0, 102.0, 101.0, 105.0, 110.0]},
+        {"symbol": "GOLD", "prices": [1900.0, 1905.0, 1903.0, 1908.0, 1915.0]},
+        {"symbol": "LINK", "prices": [7.0, 7.4, 7.2, 7.9, 8.4]},
+    ]
+}
+
+response = post_correlate_assets(payload)
+print(response["correlation_matrix"])
+```

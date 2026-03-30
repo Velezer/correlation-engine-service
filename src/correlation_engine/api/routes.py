@@ -8,6 +8,10 @@ from typing import Any
 
 from pydantic import BaseModel, ConfigDict
 
+from correlation_engine.domain.asset_correlation import (
+    AssetCorrelationRequest,
+    build_correlation_matrix,
+)
 from correlation_engine.domain.correlation import score_correlation
 from correlation_engine.domain.models import ComputedChart
 from correlation_engine.domain.weights import CorrelationWeights
@@ -21,6 +25,16 @@ class CorrelateRequest(BaseModel):
     profile_a: ComputedChart
     profile_b: ComputedChart
     weight_profile: CorrelationWeights | None = None
+
+
+class AssetCorrelateResponse(BaseModel):
+    """Structured response payload for market-asset correlation."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    symbols: list[str]
+    correlation_matrix: dict[str, dict[str, float]]
+    generated_at_utc: datetime
 
 
 class CorrelateResponse(BaseModel):
@@ -49,6 +63,21 @@ def post_correlate(payload: dict[str, Any]) -> dict[str, Any]:
         total_score=total_score,
         contributions=[asdict(item) for item in contributions],
         rationale_text=rationale_text,
+        generated_at_utc=datetime.now(tz=UTC),
+    )
+    return response.model_dump(mode="json")
+
+
+def post_correlate_assets(payload: dict[str, Any]) -> dict[str, Any]:
+    """Handle a market-asset correlation request with explicit price series."""
+
+    request = AssetCorrelationRequest.model_validate(payload)
+    symbols = [asset.symbol.upper() for asset in request.assets]
+    matrix = build_correlation_matrix(request)
+
+    response = AssetCorrelateResponse(
+        symbols=symbols,
+        correlation_matrix=matrix,
         generated_at_utc=datetime.now(tz=UTC),
     )
     return response.model_dump(mode="json")
