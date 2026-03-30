@@ -1,0 +1,36 @@
+{
+  "profile_a": {
+    "planets": [
+      {"planet": "sun", "sign": "taurus", "house": 2, "degree": 2.0},
+      {"planet": "moon", "sign": "virgo", "house": 6, "degree": 20.0},
+      {"planet": "mercury", "sign": "aries", "house": 1, "degree": 28.0},
+      {"planet": "venus", "sign": "cancer", "house": 4, "degree": 4.0},
+      {"planet": "mars", "sign": "capricorn", "house": 10, "degree": 4.0},
+      {"planet": "jupiter", "sign": "leo", "house": 5, "degree": 7.0},
+      {"planet": "saturn", "sign": "aquarius", "house": 11, "degree": 9.0},
+      {"planet": "uranus", "sign": "scorpio", "house": 8, "degree": 16.0},
+      {"planet": "neptune", "sign": "sagittarius", "house": 9, "degree": 10.0},
+      {"planet": "pluto", "sign": "pisces", "house": 12, "degree": 13.0}
+    ],
+    "signs": [],
+    "houses": [],
+    "aspects": []
+  },
+  "profile_b": {
+    "planets": [
+      {"planet": "sun", "sign": "scorpio", "house": 8, "degree": 3.0},
+      {"planet": "moon", "sign": "aquarius", "house": 11, "degree": 18.0},
+      {"planet": "mercury", "sign": "cancer", "house": 4, "degree": 29.0},
+      {"planet": "venus", "sign": "aries", "house": 1, "degree": 2.0},
+      {"planet": "mars", "sign": "libra", "house": 7, "degree": 2.0},
+      {"planet": "jupiter", "sign": "capricorn", "house": 10, "degree": 11.0},
+      {"planet": "saturn", "sign": "taurus", "house": 2, "degree": 10.0},
+      {"planet": "uranus", "sign": "leo", "house": 5, "degree": 12.0},
+      {"planet": "neptune", "sign": "gemini", "house": 3, "degree": 13.0},
+      {"planet": "pluto", "sign": "virgo", "house": 6, "degree": 15.0}
+    ],
+    "signs": [],
+    "houses": [],
+    "aspects": []
+  }
+}
